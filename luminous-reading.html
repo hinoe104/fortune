@@ -220,11 +220,7 @@ button {
 
 /* === LENORMAND LAYOUTS === */
 .cards-container.lenormand-9-layout { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 400px; margin: 0 auto; padding: 2rem; }
-.cards-container.lenormand-36-layout { display: grid !important; grid-template-columns: repeat(8, 1fr); gap: 0.5rem; max-width: 1000px; margin: 0 auto; }
-.cards-container.lenormand-36-layout .card-slot:nth-child(33) { grid-column-start: 3; }
-.cards-container.lenormand-36-layout .card-visual { width: 100%; height: auto; aspect-ratio: 2/3; }
-.cards-container.lenormand-36-layout .card-name { font-size: 0.8rem; white-space: normal; line-height: 1.1; height: 2.2em; overflow: hidden; }
-.cards-container.lenormand-36-layout .card-slot { width: auto; margin-bottom: 1rem; }
+/* lenormand-36-layout は準備中 */
 
 /* === CHARACTER SELECTION === */
 .character-options {
@@ -477,8 +473,7 @@ const SPREADS = {
     lenormand: {
         "3": { count:3,  name:"3枚引き",  layout:["1","2","3"], gridAreas:["pos1","pos2","pos3"] },
         "5": { count:5,  name:"5枚引き",  layout:["1","2","3","4","5"], gridAreas:["pos1","pos2","pos3","pos4","pos5"] },
-        "9": { count:9,  name:"9枚引き (スクエア)", layout:Array.from({length:9},(_,i)=>`${i+1}`), gridAreas:Array.from({length:9},(_,i)=>`pos${i+1}`) },
-        "36":{ count:36, name:"グランタブロー", layout:[], gridAreas:Array.from({length:36},(_,i)=>`pos${i+1}`) }
+        "9": { count:9,  name:"9枚引き (スクエア)", layout:Array.from({length:9},(_,i)=>`${i+1}`), gridAreas:Array.from({length:9},(_,i)=>`pos${i+1}`) }
     }
 };
 
@@ -638,7 +633,7 @@ function drawLenormand(spreadKey) {
     const deck = [...LENORMAND_DATA].sort(() => 0.5 - Math.random());
     const cards = deck.slice(0, spreadDef.count);
     let layout = spreadDef.layout || [];
-    if (spreadKey === '36') layout = Array(36).fill("").map((_, i) => `Pos ${i+1}`);
+    // グランタブローは準備中のため除外
     drawnCards = cards.map((c, i) => ({ position: layout[i] || `#${i+1}`, name: c.name, no: c.no }));
     renderCards(cards, layout, 'lenormand', spreadKey);
 }
