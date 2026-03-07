@@ -73,7 +73,45 @@ h2, h3 { text-align: center; font-weight: 400; margin-bottom: 1.5rem; }
 .api-status.ok { color: var(--accent-color); }
 .api-status.err { color: #9e2a2b; }
 
-/* === BUTTONS === */
+/* === TAROT INTRO CARDS === */
+.intro-card {
+    width: 80px;
+    height: 130px;
+    border: 1px solid rgba(197,160,89,0.5);
+    border-radius: 6px;
+    background: #FDFBF7;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(197,160,89,0.15);
+    animation: cardFloat 3s ease-in-out infinite;
+}
+.intro-card::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(197,160,89,0.3);
+    border-radius: 3px;
+}
+.intro-card::after {
+    content: '✦';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.4rem;
+    color: rgba(197,160,89,0.4);
+}
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+.intro-card:nth-child(2) {
+    transform: translateY(-10px);
+    animation-delay: 0.15s;
+}
+@media (max-width: 600px) {
+    .intro-card { width: 64px; height: 104px; }
+}
+
+
 .divination-options, .spread-options {
     display: flex; justify-content: center;
     gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem;
@@ -291,7 +329,7 @@ footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: #999; bord
 
 <header class="site-header">
     <h1>Luminous Salon</h1>
-    <p class="subtitle">光と星のサンルーム</p>
+    <p class="subtitle">Tarot Reading</p>
 </header>
 
 <main>
@@ -311,26 +349,28 @@ footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: #999; bord
         <div class="api-status" id="apiStatus"></div>
     </div>
 
-    <!-- Selection -->
-    <section id="selection-area" class="fade-in">
-
-        <!-- Step 1: Divination type -->
-        <div class="step" id="step-type">
-            <h2>占術を選択</h2>
-            <div class="divination-options">
-                <button class="divination-btn" data-type="tarot">
-                    <span class="icon">🃏</span>
-                    <span class="label">タロット</span>
-                </button>
-                <button class="divination-btn" data-type="lenormand">
-                    <span class="icon">🔮</span>
-                    <span class="label">ルノルマン</span>
-                </button>
-            </div>
+    <!-- Tarot Intro -->
+    <div id="tarot-intro" style="text-align:center; padding: 3rem 1rem 2rem;">
+        <div style="display:flex; justify-content:center; gap:1.2rem; margin-bottom:2.5rem;">
+            <div class="intro-card" style="animation-delay:0s"></div>
+            <div class="intro-card" style="animation-delay:0.15s; transform:translateY(-10px)"></div>
+            <div class="intro-card" style="animation-delay:0.3s"></div>
         </div>
+        <p style="font-size:0.82rem; color:#aaa; letter-spacing:0.25em; margin-bottom:0.6rem;">THREE READERS</p>
+        <p style="font-size:0.95rem; color:#6a5a40; line-height:1.9; max-width:360px; margin:0 auto 2rem;">
+            3人のリーダーがタロットを読みます。<br>同じカードでも、声はそれぞれ違います。
+        </p>
+        <button onclick="document.getElementById('tarot-intro').style.display='none'; document.getElementById('selection-area').classList.remove('hidden');"
+            style="padding:0.75rem 2.5rem; border:1px solid var(--accent-color); color:var(--accent-color); font-family:var(--font-jp); font-size:0.9rem; letter-spacing:0.15em; cursor:pointer; background:transparent; transition:all 0.3s;">
+            はじめる
+        </button>
+    </div>
 
-        <!-- Step 2: Character -->
-        <div class="step hidden" id="step-character">
+    <!-- Selection -->
+    <section id="selection-area" class="fade-in hidden">
+
+        <!-- Step 1: Character -->
+        <div class="step" id="step-character">
             <h2>リーダーを選択</h2>
             <div class="character-options">
                 <button class="char-btn" data-char="ren">
@@ -530,24 +570,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// === STEP 1: Divination type ===
-document.querySelectorAll('.divination-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.divination-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentState.type = btn.dataset.type;
-        currentState.character = null;
-        currentState.spread = null;
-        document.querySelectorAll('.char-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('divinate-btn').classList.add('hidden');
-        document.getElementById('step-character').classList.remove('hidden');
-        document.getElementById('step-question').classList.add('hidden');
-        document.getElementById('step-spread').classList.add('hidden');
-        document.getElementById('step-character').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-});
+// === タロット固定 ===
+currentState.type = 'tarot';
 
-// === STEP 2: Character ===
+// === STEP 1: Character ===
 document.querySelectorAll('.char-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.char-btn').forEach(b => b.classList.remove('active'));
@@ -603,12 +629,12 @@ document.getElementById('reset-btn').addEventListener('click', () => {
     document.getElementById('readingError').classList.add('hidden');
     document.getElementById('reading-char-label').textContent = '';
     document.getElementById('questionInput').value = '';
-    // Reset steps
-    document.getElementById('step-character').classList.add('hidden');
+    document.getElementById('tarot-intro').style.display = 'none';
+    document.getElementById('step-character').classList.remove('hidden');
     document.getElementById('step-question').classList.add('hidden');
     document.getElementById('step-spread').classList.add('hidden');
     document.getElementById('divinate-btn').classList.add('hidden');
-    document.querySelectorAll('.divination-btn, .char-btn, .spread-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.char-btn, .spread-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('selection-area').classList.remove('hidden');
     drawnCards = [];
     window.scrollTo({ top: 0, behavior: 'smooth' });
