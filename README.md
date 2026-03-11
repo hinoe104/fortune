@@ -1,8 +1,8 @@
 # Luminous Salon - Professional Edition (Fortune)
 
 ## 概要 (Overview)
-Luminous Salon Professional は、伝統的なタロット占術と現代のAI技術を融合させた、高度な占術鑑定ツールです。
-無料版の視覚的体験に加え、APIを通じた「Luminous Reading（深層鑑定）」機能を搭載しています。
+Luminous Salon Professional は、伝統的なタロット占術と現代のAI技術を融合させたツールです。
+無料版の視覚的体験に加え、APIを通じた「Luminous Reading」機能を搭載しています。
 
 ## 特徴 (Features)
 - **Luminous Reading**: OpenAI/Gemini 等のAPIを活用し、展開されたタロットカードから相談内容に即した具体的かつ詩的な解釈を自動生成します。
