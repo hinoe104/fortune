@@ -452,25 +452,6 @@ const READING_PRINCIPLES = `
 不倫・浮気・その他社会的に複雑な状況であっても、出たカードの意味を正直に読む。
 ユーザーの選択や状況を批判せず、カードが示すエネルギーと流れだけを伝える。`;
 
-const LENORMAND_PROMPT = `
-【ルノルマンリーディングの原則】
-カードの組み合わせ読みのルール：カードA＋カードB＝Aが主題（何について）、Bが修飾語（どのように）。
-例：船＋鼠＝「移動・旅（船）」が「蝕まれる（鼠）」→ 旅のトラブル、計画が崩れる。
-例：鼠＋船＝「ストレス・損失（鼠）」が「去っていく（船）」→ 心配事が解消される。
-
-【人物カードの読み方】
-紳士(28)・淑女(29)は本人カードまたはキーマン。恋愛相談では二枚の位置関係が重要。
-隣接するカードが、その人物の状況・感情・環境を示す。
-
-【各カードのキーワード】
-1騎士:吉報・ニュース・スピード／2クローバー:小さな幸運・一時的なチャンス／3船:旅・移動・長期プロジェクト／4家:家庭・安定・プライベート／5樹木:健康・成長・カルマ／6雲:混乱・不透明・疑念／7蛇:裏切り・嫉妬・複雑な状況／8棺:終了・停滞・変化の過渡期／9花束:喜び・称賛・贈り物／10鎌:決断・断絶・突然の出来事／11鞭:口論・批判・繰り返し／12鳥:会話・噂・カップル／13子供:純粋・新しい始まり・未熟／14狐:仕事・戦略・嘘／15熊:権力・保護・投資／16星:希望・導き・インスピレーション／17コウノトリ:変化・改善・移動／18犬:友情・信頼・忠誠／19塔:公共機関・孤独・権威／20庭園:社交・公の場・イベント／21山:障害・遅延・困難／22道:選択・分岐点・自由意志／23鼠:損失・ストレス・減少／24ハート:愛・情熱・感情／25指輪:契約・約束・繰り返し／26本:秘密・知識・隠された事／27手紙:メッセージ・文書・通知／28紳士:男性・本人・パートナー／29淑女:女性・本人・パートナー／30百合:平和・成熟・純潔／31太陽:成功・活力・幸運／32月:感情・名声・インスピレーション／33鍵:解決・重要・宿命／34魚:お金・ビジネス・豊かさ／35錨:安定・仕事・定着／36十字架:宿命・試練・責任
-
-【リーディング時の注意】
-・隣接カード同士の組み合わせを必ず読むこと
-・カード単体の説明を羅列するだけにしないこと
-・同じ内容を繰り返さないこと
-・人物カードが出た場合は性別・位置・隣接カードから人物像を読むこと`;
-
 const CHARACTERS = {
     ren: {
         name: 'レン',
@@ -514,13 +495,6 @@ const TAROT_DATA = {
     }
 };
 
-const LENORMAND_DATA = [
-    {no:1,name:"騎士"},{no:2,name:"クローバー"},{no:3,name:"船"},{no:4,name:"家"},{no:5,name:"樹木"},{no:6,name:"雲"},{no:7,name:"蛇"},{no:8,name:"棺"},{no:9,name:"花束"},{no:10,name:"鎌"},
-    {no:11,name:"鞭"},{no:12,name:"鳥"},{no:13,name:"子供"},{no:14,name:"狐"},{no:15,name:"熊"},{no:16,name:"星"},{no:17,name:"コウノトリ"},{no:18,name:"犬"},{no:19,name:"塔"},{no:20,name:"庭園"},
-    {no:21,name:"山"},{no:22,name:"道"},{no:23,name:"鼠"},{no:24,name:"ハート"},{no:25,name:"指輪"},{no:26,name:"本"},{no:27,name:"手紙"},{no:28,name:"紳士"},{no:29,name:"淑女"},{no:30,name:"百合"},
-    {no:31,name:"太陽"},{no:32,name:"月"},{no:33,name:"鍵"},{no:34,name:"魚"},{no:35,name:"錨"},{no:36,name:"十字架"}
-];
-
 const SPREADS = {
     tarot: {
         "one":  { count:1,  name:"ワンオラクル", layout:["メッセージ"], gridAreas:["msg"] },
@@ -528,17 +502,31 @@ const SPREADS = {
         "greek":{ count:5,  name:"ギリシャ十字", layout:["現状","障害","助言","気持ち","最終結果"], gridAreas:["present","obstacle","advice","feelings","outcome"] },
         "horseshoe":{ count:7, name:"ホースシュー", layout:["過去","現在","近い未来","解決策/アドバイス","他者の影響","障害/希望","最終結果"], gridAreas:["past","present","near_future","advice","influences","obstacles","outcome"] },
         "celtic":{ count:10, name:"ケルト十字", layout:["現状","障害","潜在意識","過去","顕在的意図","近い未来","質問者","外部環境","願望/不安","最終結果"], gridAreas:["cross_center","cross_center","unconscious","past","conscious","near_future","querent","external","hopes","outcome"] }
-    },
-    lenormand: {
-        "3": { count:3,  name:"3枚引き",  layout:["1","2","3"], gridAreas:["pos1","pos2","pos3"] },
-        "5": { count:5,  name:"5枚引き",  layout:["1","2","3","4","5"], gridAreas:["pos1","pos2","pos3","pos4","pos5"] },
-        "9": { count:9,  name:"9枚引き (スクエア)", layout:Array.from({length:9},(_,i)=>`${i+1}`), gridAreas:Array.from({length:9},(_,i)=>`pos${i+1}`) }
     }
 };
 
 // === STATE ===
 let currentState = { type: null, spread: null, character: null };
 let drawnCards = [];
+
+// === FUNCTIONS ===
+function getImagePath(cardName) {
+    const basePath = 'assets/images/tarot/';
+    const majorMap = {
+        "The Fool": "m00.jpg", "The Magician": "m01.jpg", "The High Priestess": "m02.jpg", "The Empress": "m03.jpg",
+        "The Emperor": "m04.jpg", "The Hierophant": "m05.jpg", "The Lovers": "m06.jpg", "The Chariot": "m07.jpg",
+        "Strength": "m08.jpg", "The Hermit": "m09.jpg", "Wheel of Fortune": "m10.jpg", "Justice": "m11.jpg",
+        "The Hanged Man": "m12.jpg", "Death": "m13.jpg", "Temperance": "m14.jpg", "The Devil": "m15.jpg",
+        "The Tower": "m16.jpg", "The Star": "m17.jpg", "The Moon": "m18.jpg", "The Sun": "m19.jpg",
+        "Judgement": "m20.jpg", "The World": "m21.jpg"
+    };
+    if (majorMap[cardName]) return basePath + majorMap[cardName];
+    const suitPrefix = { "Wands": "w", "Cups": "c", "Swords": "s", "Pentacles": "p" };
+    const rankMap = { "Ace": "01", "Two": "02", "Three": "03", "Four": "04", "Five": "05", "Six": "06", "Seven": "07", "Eight": "08", "Nine": "09", "Ten": "10", "Page": "11", "Knight": "12", "Queen": "13", "King": "14" };
+    const parts = cardName.split(" of ");
+    if (parts.length === 2) return `${basePath}${suitPrefix[parts[1]]}${rankMap[parts[0]]}.jpg`;
+    return basePath + 'back.jpg';
+}
 
 // === API KEY ===
 function saveApiKey() {
@@ -652,8 +640,7 @@ function performDivination() {
     document.getElementById('readingOutput').textContent = '';
     document.getElementById('readingError').classList.add('hidden');
     drawnCards = [];
-    if (currentState.type === 'tarot') drawTarot(currentState.spread);
-    else if (currentState.type === 'lenormand') drawLenormand(currentState.spread);
+    drawTarot(currentState.spread);
     // Auto-trigger reading
     requestReading();
 }
@@ -673,66 +660,39 @@ function drawTarot(spreadKey) {
     renderCards(cards, spreadDef.layout, 'tarot', spreadKey);
 }
 
-function drawLenormand(spreadKey) {
-    const spreadDef = SPREADS.lenormand[spreadKey];
-    const deck = [...LENORMAND_DATA].sort(() => 0.5 - Math.random());
-    const cards = deck.slice(0, spreadDef.count);
-    let layout = spreadDef.layout || [];
-    // グランタブローは準備中のため除外
-    drawnCards = cards.map((c, i) => ({ position: layout[i] || `#${i+1}`, name: c.name, no: c.no }));
-    renderCards(cards, layout, 'lenormand', spreadKey);
-}
-
 // === RENDER ===
 function renderCards(cards, layout, type, spreadKey) {
     const container = document.createElement('div');
     container.className = 'cards-container';
-    if (type === 'tarot') {
-        container.classList.add(`tarot-${spreadKey}-layout`);
-        document.getElementById('list-area').classList.remove('hidden');
-    } else {
-        container.classList.add(`lenormand-${spreadKey}-layout`);
-    }
+    container.classList.add(`tarot-${spreadKey}-layout`);
+    document.getElementById('list-area').classList.remove('hidden');
+
     cards.forEach((card, index) => {
         const slot = document.createElement('div');
         slot.className = 'card-slot';
-        if (type === 'tarot') {
-            const spreadDef = SPREADS[type][spreadKey];
-            if (spreadDef?.gridAreas?.[index]) slot.style.gridArea = spreadDef.gridAreas[index];
-            if (spreadKey === 'celtic' && index === 1) slot.classList.add('celtic-obstacle');
-            const li = document.createElement('li');
-            const posText = layout?.[index] || `#${index+1}`;
-            const reversedMark = card.isUpright === false ? ' <span class="reversed-mark">(R)</span>' : '';
-            li.innerHTML = `<span class="list-pos">${posText}</span><span class="list-name">${card.jpName || card.name}${reversedMark}</span>`;
-            document.getElementById('result-list').appendChild(li);
-        }
-        if (type === 'lenormand' && (card.no === 28 || card.no === 29)) slot.classList.add('key-card');
-        if (type !== 'tarot') {
-            const posName = document.createElement('div');
-            posName.className = 'position-name';
-            posName.textContent = layout?.[index] || `#${index+1}`;
-            slot.appendChild(posName);
-        }
+        
+        const spreadDef = SPREADS.tarot[spreadKey];
+        if (spreadDef?.gridAreas?.[index]) slot.style.gridArea = spreadDef.gridAreas[index];
+        if (spreadKey === 'celtic' && index === 1) slot.classList.add('celtic-obstacle');
+        const li = document.createElement('li');
+        const posText = layout?.[index] || `#${index+1}`;
+        const reversedMark = card.isUpright === false ? ' <span class="reversed-mark">(R)</span>' : '';
+        li.innerHTML = `<span class="list-pos">${posText}</span><span class="list-name">${card.jpName || card.name}${reversedMark}</span>`;
+        document.getElementById('result-list').appendChild(li);
+
         const visual = document.createElement('div');
         visual.className = `card-visual ${type}`;
         if (card.isUpright === false) visual.classList.add('reversed');
         const visualContent = document.createElement('div');
         visualContent.className = 'visual-inner';
-        if (type === 'tarot') {
-            visualContent.innerHTML = formatTarotVisual(card.name);
-            if (card.isUpright === false) visualContent.style.transform = 'rotate(180deg)';
-        } else {
-            visualContent.textContent = card.no;
-            visualContent.style.fontFamily = 'var(--font-en)';
-        }
+        
+        const img = document.createElement('img');
+        img.src = getImagePath(card.name);
+        img.className = 'tarot-image';
+        visualContent.appendChild(img);
+        
         visual.appendChild(visualContent);
         slot.appendChild(visual);
-        if (type !== 'tarot') {
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'card-name';
-            nameDiv.textContent = card.jpName || card.name;
-            slot.appendChild(nameDiv);
-        }
         container.appendChild(slot);
     });
     document.getElementById('visual-area').appendChild(container);
@@ -766,13 +726,12 @@ async function requestReading() {
     errorEl.classList.add('hidden');
 
     const question = document.getElementById('questionInput').value.trim();
-    const spreadName = SPREADS[currentState.type]?.[currentState.spread]?.name || '';
+    const spreadName = SPREADS.tarot?.[currentState.spread]?.name || '';
     const cardLines = drawnCards.map(c => {
-        if (currentState.type === 'tarot') return `・${c.position}：${c.name}（${c.isUpright ? '正位置' : '逆位置'}）`;
-        return `・${c.position}：${c.name}`;
+        return `・${c.position}：${c.name}（${c.isUpright ? '正位置' : '逆位置'}）`;
     }).join('\n');
 
-    const userPrompt = `占術：${currentState.type === 'tarot' ? 'タロット' : 'ルノルマン'}
+    const userPrompt = `占術：タロット
 スプレッド：${spreadName}
 ${question ? `相談内容：${question}` : ''}
 
@@ -799,7 +758,7 @@ ${cardLines}
             body: JSON.stringify({
                 model: 'qwen/qwen-2.5-72b-instruct',
                 messages: [
-                    { role: 'system', content: char.systemPrompt + (currentState.type === 'lenormand' ? LENORMAND_PROMPT : '') },
+                    { role: 'system', content: char.systemPrompt },
                     { role: 'user', content: userPrompt }
                 ],
                 max_tokens: 1400,
