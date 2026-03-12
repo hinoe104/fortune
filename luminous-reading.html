@@ -178,10 +178,17 @@ footer a { color: #999; text-decoration: none; margin: 0 0.8rem; }
 <main>
     <div class="api-setup" id="apiSetup">
         <h3>OpenRouter API Key</h3>
+        <p>
+            AIリーディング機能を使うには、<a href="https://openrouter.ai/keys" target="_blank">OpenRouter</a>のAPIキーが必要です。<br>
+            キーはあなたのブラウザにのみ保存され、外部には送信されません。
+            使った分だけ課金されます（目安：1回あたり約0.03円）。<br>
+            <a href="setup.html" style="color:var(--accent-color);font-size:0.85rem;">▶ 初めての方・設定方法はこちら</a>
+        </p>
         <div class="api-row">
-            <input type="password" id="apiKeyInput" placeholder="sk-or-v1-...">
+            <input type="password" id="apiKeyInput" placeholder="sk-or-v1-..." autocomplete="off">
             <button class="api-save-btn" onclick="saveApiKey()">保存</button>
         </div>
+        <div class="api-status" id="apiStatus"></div>
     </div>
 
     <div id="tarot-intro" style="text-align:center; padding: 3rem 1rem;">
@@ -265,8 +272,32 @@ const SPREADS = {
 let state = { char:null, spread:null };
 let drawn = [];
 
-function saveApiKey(){ localStorage.setItem('luminous_key', document.getElementById('apiKeyInput').value); alert('保存しました'); }
-function getApiKey(){ return localStorage.getItem('luminous_key'); }
+function saveApiKey() {
+    const key = document.getElementById('apiKeyInput').value.trim();
+    const status = document.getElementById('apiStatus');
+    if (!key.startsWith('sk-or-')) {
+        status.textContent = 'キーの形式が正しくありません（sk-or-... で始まるもの）';
+        status.className = 'api-status err';
+        return;
+    }
+    localStorage.setItem('luminous_or_key', key);
+    status.textContent = '✦ 保存しました';
+    status.className = 'api-status ok';
+    document.getElementById('apiKeyInput').value = '';
+    setTimeout(() => document.getElementById('apiSetup').classList.add('hidden'), 800);
+}
+
+function getApiKey(){ return localStorage.getItem('luminous_or_key'); }
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (getApiKey()) {
+        document.getElementById('apiSetup').classList.add('hidden');
+        const link = document.createElement('p');
+        link.style.cssText = 'text-align:center;font-size:0.75rem;color:#bbb;margin:0.5rem 0 1.5rem;';
+        link.innerHTML = '<a href="#" style="color:#bbb;text-decoration:none;" onclick="document.getElementById(\'apiSetup\').classList.remove(\'hidden\');this.parentNode.remove();return false;">APIキーを変更する</a>';
+        document.querySelector('main').prepend(link);
+    }
+});
 
 document.querySelectorAll('.char-btn').forEach(b => b.addEventListener('click', () => {
     state.char = b.dataset.char;
