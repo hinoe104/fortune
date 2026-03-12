@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luminous Salon - AI Reading</title>
+    <title>Luminous Salon - AI Reading Professional</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Zen+Old+Mincho:wght@400;600&display=swap" rel="stylesheet">
@@ -29,36 +29,48 @@ body {
 }
 .site-header {
     text-align: center;
-    padding: 3rem 1rem;
+    padding: 2.5rem 1rem;
     border-bottom: 1px solid rgba(197,160,89,0.2);
 }
 .site-header h1 {
     font-family: var(--font-en);
-    font-size: 3rem; margin: 0;
-    font-weight: 400; letter-spacing: 0.1em;
+    font-size: 2.8rem; margin: 0;
+    font-weight: 400; letter-spacing: 0.12em;
 }
-.subtitle { font-size: 0.9rem; color: var(--accent-color); margin-top: 0.5rem; letter-spacing: 0.2em; }
+.subtitle { font-size: 0.85rem; color: var(--accent-color); margin-top: 0.4rem; letter-spacing: 0.25em; text-transform: uppercase; }
+
+/* === NAVIGATION === */
+.site-nav {
+    display: flex; justify-content: center; gap: 1.5rem;
+    margin-top: 1.5rem; flex-wrap: wrap;
+}
+.site-nav a {
+    color: #888; text-decoration: none; font-size: 0.8rem;
+    letter-spacing: 0.1em; transition: color 0.3s;
+}
+.site-nav a:hover { color: var(--accent-color); }
+
 main { flex: 1; padding: 2rem 1rem; max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; }
-h2, h3 { text-align: center; font-weight: 400; margin-bottom: 1.5rem; }
+h2, h3 { text-align: center; font-weight: 400; margin-bottom: 1.5rem; letter-spacing: 0.05em; }
 
 /* === API KEY SETUP === */
 .api-setup {
-    max-width: 520px; margin: 0 auto 2.5rem;
-    background: #fff; border: 1px solid rgba(197,160,89,0.25);
+    max-width: 520px; margin: 0 auto 3rem;
+    background: #fff; border: 1px solid rgba(197,160,89,0.2);
     border-radius: 8px; padding: 1.8rem 2rem;
     box-shadow: var(--card-shadow);
 }
-.api-setup h3 { margin-top: 0; font-size: 1rem; letter-spacing: 0.08em; color: var(--accent-color); text-align: left; }
-.api-setup p { font-size: 0.82rem; color: #888; line-height: 1.7; margin: 0 0 1rem; }
+.api-setup h3 { margin-top: 0; font-size: 0.95rem; color: var(--accent-color); text-align: left; }
+.api-setup p { font-size: 0.8rem; color: #999; margin-bottom: 1rem; }
 .api-row { display: flex; gap: 0.6rem; align-items: center; }
 .api-row input {
-    flex: 1; padding: 0.6rem 0.8rem;
-    border: 1px solid rgba(197,160,89,0.35); border-radius: 4px;
+    flex: 1; padding: 0.7rem 0.9rem;
+    border: 1px solid rgba(197,160,89,0.3); border-radius: 4px;
     font-family: var(--font-en); font-size: 0.9rem;
     background: var(--bg-color); color: var(--text-color); outline: none;
 }
 .api-save-btn {
-    padding: 0.6rem 1.2rem;
+    padding: 0.7rem 1.4rem;
     background: var(--accent-color); color: #fff;
     border: none; border-radius: 4px;
     font-family: var(--font-jp); font-size: 0.85rem;
@@ -68,7 +80,7 @@ h2, h3 { text-align: center; font-weight: 400; margin-bottom: 1.5rem; }
 
 /* === SELECTION UI === */
 .character-options, .spread-options {
-    display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 2rem;
+    display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 2.5rem;
 }
 .char-btn, .spread-btn {
     background: #fff; border: 1px solid rgba(197,160,89,0.25);
@@ -77,25 +89,34 @@ h2, h3 { text-align: center; font-weight: 400; margin-bottom: 1.5rem; }
 }
 .char-btn {
     display: flex; flex-direction: column; align-items: center;
-    width: 140px; padding: 1.5rem 1rem; border-radius: 8px; box-shadow: var(--card-shadow);
+    width: 140px; padding: 1.6rem 1rem; border-radius: 8px; box-shadow: var(--card-shadow);
 }
-.char-btn .char-name { font-size: 1.1rem; margin-top: 0.5rem; font-family: var(--font-en); letter-spacing: 0.05em; }
-.char-btn:hover, .char-btn.active { border-color: var(--accent-color); background: rgba(197,160,89,0.05); transform: translateY(-2px); }
+.char-btn .char-name { font-size: 1.1rem; margin-top: 0.6rem; font-weight: 600; letter-spacing: 0.05em; }
+.char-btn:hover, .char-btn.active { border-color: var(--accent-color); background: rgba(197,160,89,0.06); transform: translateY(-2px); }
 
-.spread-btn { padding: 0.8rem 1.8rem; border-radius: 30px; font-size: 0.95rem; }
+.spread-btn { padding: 0.8rem 2rem; border-radius: 30px; font-size: 0.95rem; }
 .spread-btn:hover, .spread-btn.active { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
 
+.question-field {
+    width: 100%; max-width: 600px; display: block; margin: 0 auto 1.5rem;
+    padding: 1rem 1.2rem; border: 1px solid rgba(197,160,89,0.35); border-radius: 4px;
+    font-family: var(--font-jp); font-size: 1rem; line-height: 1.7;
+    background: #fff; color: var(--text-color); outline: none; resize: none;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
+}
+.question-field:focus { border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(197,160,89,0.1); }
+
 .action-btn {
-    display: block; margin: 2rem auto; padding: 1rem 3.5rem;
+    display: block; margin: 2rem auto; padding: 1rem 4rem;
     background: var(--text-color); color: #fff;
     border: none; border-radius: 2px; font-size: 1.1rem;
-    letter-spacing: 0.15em; cursor: pointer; transition: all 0.3s;
+    letter-spacing: 0.2em; cursor: pointer; transition: all 0.3s;
 }
-.action-btn:hover { background: var(--accent-color); }
-.action-btn.secondary { background: transparent; border: 1px solid var(--text-color); color: var(--text-color); }
+.action-btn:hover { background: var(--accent-color); transform: translateY(-1px); }
+.action-btn.secondary { background: transparent; border: 1px solid var(--text-color); color: var(--text-color); padding: 0.8rem 3rem; font-size: 1rem; }
 
 /* === CARDS === */
-.cards-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 1000px; margin: 0 auto; }
+.cards-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem; max-width: 1000px; margin: 0 auto; }
 .card-slot { display: flex; flex-direction: column; align-items: center; width: 110px; text-align: center; }
 .card-visual {
     width: 100px; height: 170px; background: #fff; border: 1px solid #eee; border-radius: 6px;
@@ -103,28 +124,30 @@ h2, h3 { text-align: center; font-weight: 400; margin-bottom: 1.5rem; }
 }
 .tarot-image { width: 100%; height: 100%; object-fit: cover; display: block; }
 .card-visual.reversed { transform: rotate(180deg); }
-.card-name { font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; color: #666; }
+.card-name { font-size: 0.85rem; font-weight: 600; margin-top: 0.6rem; color: #555; }
 
 /* === RESULT LAYOUT === */
-.result-wrapper { display: flex; gap: 2rem; justify-content: center; align-items: flex-start; margin-top: 2rem; }
-.visual-area { flex: 2; }
-.reading-section { max-width: 700px; margin: 3rem auto; border-top: 1px solid rgba(197,160,89,0.2); padding-top: 2rem; }
-.reading-output { font-size: 1rem; line-height: 2; white-space: pre-wrap; border-left: 2px solid var(--accent-color); padding-left: 1.5rem; color: #444; }
-.reading-loading { text-align: center; color: var(--accent-color); animation: pulse 1.5s infinite; }
+.reading-section { max-width: 720px; margin: 3.5rem auto; border-top: 1px solid rgba(197,160,89,0.2); padding-top: 2.5rem; }
+.reading-output { font-size: 1.05rem; line-height: 2.1; white-space: pre-wrap; border-left: 3px solid var(--accent-color); padding-left: 1.8rem; color: #3a3a3a; }
+.reading-loading { text-align: center; color: var(--accent-color); font-size: 0.9rem; letter-spacing: 0.1em; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
 .hidden { display: none !important; }
-footer { text-align: center; padding: 3rem; font-size: 0.85rem; color: #999; border-top: 1px solid #eee; margin-top: auto; }
-footer a { color: #999; text-decoration: none; margin: 0 0.5rem; }
+footer { text-align: center; padding: 4rem 1rem; font-size: 0.85rem; color: #aaa; border-top: 1px solid #f0f0f0; margin-top: auto; }
+footer a { color: #999; text-decoration: none; margin: 0 0.8rem; border-bottom: 1px solid transparent; transition: border 0.3s; }
+footer a:hover { border-bottom-color: #ccc; }
 
-/* === TAROT LAYOUTS (Desktop) === */
-.cards-container.tarot-celtic-layout { display: grid; grid-template-columns: repeat(5, 110px); grid-template-rows: repeat(4, 180px); grid-template-areas: ". conscious . . outcome" "past cross_center near_future . hopes" ". unconscious . . external" ". . . . querent"; justify-content: center; }
-.tarot-celtic-layout .celtic-obstacle { grid-area: cross_center; z-index: 2; transform: translateY(20px); }
-.tarot-celtic-layout .celtic-obstacle .card-visual { transform: rotate(90deg); }
+/* === TAROT LAYOUTS === */
+.cards-container.tarot-celtic-layout { display: grid; grid-template-columns: repeat(5, 110px); grid-template-rows: repeat(4, 180px); grid-template-areas: ". conscious . . outcome" "past cross_center near_future . hopes" ". unconscious . . external" ". . . . querent"; justify-content: center; gap: 0.5rem; }
+.tarot-celtic-layout .celtic-obstacle { grid-area: cross_center; z-index: 2; transform: translateY(25px); }
+.tarot-celtic-layout .celtic-obstacle .card-visual { transform: rotate(90deg); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 
 @media (max-width: 768px) {
     .site-header h1 { font-size: 2.2rem; }
-    .cards-container.tarot-celtic-layout { transform: scale(0.65); transform-origin: top center; height: 480px; }
+    .site-nav { gap: 0.8rem; }
+    .site-nav a { font-size: 0.75rem; }
+    .cards-container.tarot-celtic-layout { transform: scale(0.62); transform-origin: top center; height: 460px; margin-bottom: 2rem; }
+    .action-btn { width: 90%; padding: 1rem 0; }
 }
     </style>
 </head>
@@ -132,7 +155,13 @@ footer a { color: #999; text-decoration: none; margin: 0 0.5rem; }
 
 <header class="site-header">
     <h1>Luminous Salon</h1>
-    <p class="subtitle">Tarot Reading Professional</p>
+    <p class="subtitle">Tarot Reading</p>
+    <nav class="site-nav">
+        <a href="setup.html">SETUP</a>
+        <a href="faq.html">FAQ</a>
+        <a href="terms.html">TERMS</a>
+        <a href="tokushoho.html">LEGAL</a>
+    </nav>
 </header>
 
 <main>
@@ -144,24 +173,24 @@ footer a { color: #999; text-decoration: none; margin: 0 0.5rem; }
         </div>
     </div>
 
-    <section id="selection-area">
+    <section id="selection-area" class="fade-in">
         <div class="step" id="step-character">
             <h2>リーダーを選択</h2>
             <div class="character-options">
-                <button class="char-btn" data-char="ren">🌙<span class="char-name">Ren</span></button>
-                <button class="char-btn" data-char="miharu">✨<span class="char-name">Miharu</span></button>
-                <button class="char-btn" data-char="kazuko">🌸<span class="char-name">Kazuko</span></button>
+                <button class="char-btn" data-char="ren">🌙<span class="char-name">レン</span></button>
+                <button class="char-btn" data-char="miharu">✨<span class="char-name">ミハル</span></button>
+                <button class="char-btn" data-char="kazuko">🌸<span class="char-name">カズコ</span></button>
             </div>
         </div>
         <div class="step hidden" id="step-question">
             <h2>相談内容</h2>
-            <textarea class="question-field" id="questionInput" rows="3" placeholder="問いを入力してください"></textarea>
-            <button class="action-btn" onclick="goToSpread()">スプレッドを選ぶ</button>
+            <textarea class="question-field" id="questionInput" rows="4" placeholder="あなたの問いをこちらに記してください"></textarea>
+            <button class="action-btn" onclick="goToSpread()">スプレッドを選択する</button>
         </div>
         <div class="step hidden" id="step-spread">
-            <h3>スプレッドを選択</h3>
+            <h3>展開方法を選択</h3>
             <div id="spread-options" class="spread-options"></div>
-            <button id="divinate-btn" class="action-btn hidden">占う</button>
+            <button id="divinate-btn" class="action-btn hidden">天啓を授かる</button>
         </div>
     </section>
 
@@ -175,28 +204,28 @@ footer a { color: #999; text-decoration: none; margin: 0 0.5rem; }
 </main>
 
 <footer>
-    <p>&copy; 2025 Luminous Salon. Designed by Urara Ichika.</p>
-    <p><a href="terms.html">利用規約</a> | <a href="tokushoho.html">特定商取引法</a></p>
+    <p>&copy; 2025 Luminous Salon. Produced by Urara Ichika.</p>
+    <p><a href="privacy.html">プライバシーポリシー</a> | <a href="terms.html">利用規約</a></p>
 </footer>
 
 <script>
 const READING_PRINCIPLES = `
-【最重要：鉄壁の規約遵守命令】
-回答を開始する前に、相談内容が以下の「禁止事項」に該当するかを厳格に判定せよ。
-1. 生死に関わること（寿命、病気の成否、妊娠・出産の予後、死期等）
-2. 医療・診断・治療方針の提示
+【絶対守護命令：利用規約の遵守】
+回答の冒頭で、以下の相談内容に該当するかを厳格に判定せよ。
+1. 生死に関わること（寿命、妊娠・出産、病気の成否、死期等）
+2. 医療・診断・治療の助言
 3. ギャンブル・投資・投機の予想
-4. 特定人物の不幸を願う内容
-該当する場合、カードの解釈を一切行わず、即座に以下の定型文のみを出力して終了せよ：
-「規約によりお答えできません。生死、医療、ギャンブル、または誰かの不幸に関わるテーマには対応しておりません。別のテーマでご相談ください。」
-※「該当しそうですが...」といった前置きや、カードの断片的な意味を述べることも厳禁する。
+4. 特定人物への呪詛、不幸を願う内容
+これらに該当する場合、カードの意味を一切述べず、即座に以下の文言のみを出力して終了すること：
+「規約によりお答えできません。生死、医療、ギャンブル、または誰かの不幸に関わるテーマについては対応しておりません。別のテーマでご相談ください。」
+※ 前置きや、カードの断片的な解釈を混ぜることも厳禁する。
 
-【リーディング原則】
-禁止事項に該当しない場合のみ、カードの象徴を誠実に読み解くこと。説教や道徳的判断は不要。`;
+【リーディング方針】
+規約内であれば、カードの象徴を誠実に読み解くこと。道徳的説教は不要。`;
 
 const CHARACTERS = {
-    ren: { name: 'レン', prompt: `あなたは占い師「レン」。クールで鋭い。${READING_PRINCIPLES}` },
-    miharu: { name: 'ミハル', prompt: `あなたは占い師「ミハル」。穏やかで包み込む。${READING_PRINCIPLES}` },
+    ren: { name: 'レン', prompt: `あなたは占い師「レン」。クールで鋭い口調。${READING_PRINCIPLES}` },
+    miharu: { name: 'ミハル', prompt: `あなたは占い師「ミハル」。穏やかで包み込む口調。${READING_PRINCIPLES}` },
     kazuko: { name: 'カズコ', prompt: `あなたは占い師「カズコ」。関西弁の親しみやすい口調。${READING_PRINCIPLES}` }
 };
 
@@ -221,7 +250,7 @@ const SPREADS = {
 let state = { char:null, spread:null };
 let drawn = [];
 
-function saveApiKey(){ localStorage.setItem('luminous_key', document.getElementById('apiKeyInput').value); alert('保存しました'); }
+function saveApiKey(){ localStorage.setItem('luminous_key', document.getElementById('apiKeyInput').value); alert('APIキーを保存しました'); }
 function getApiKey(){ return localStorage.getItem('luminous_key'); }
 
 document.querySelectorAll('.char-btn').forEach(b => b.addEventListener('click', () => {
@@ -229,6 +258,7 @@ document.querySelectorAll('.char-btn').forEach(b => b.addEventListener('click', 
     document.querySelectorAll('.char-btn').forEach(btn => btn.classList.remove('active'));
     b.classList.add('active');
     document.getElementById('step-question').classList.remove('hidden');
+    document.getElementById('step-question').scrollIntoView({behavior:'smooth'});
 }));
 
 function goToSpread(){
@@ -244,6 +274,7 @@ function goToSpread(){
         };
         opts.appendChild(btn);
     });
+    document.getElementById('step-spread').scrollIntoView({behavior:'smooth'});
 }
 
 document.getElementById('divinate-btn').onclick = () => {
