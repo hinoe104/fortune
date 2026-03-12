@@ -211,7 +211,11 @@ footer a { color: #999; text-decoration: none; margin: 0 0.8rem; }
         </div>
         <div class="step hidden" id="step-question">
             <h2>相談内容</h2>
-            <textarea class="question-field" id="questionInput" rows="4" placeholder="問いを記してください"></textarea>
+            <div style="max-width: 600px; margin: 0 auto 1.5rem; padding: 1rem; background: rgba(197,160,89,0.05); border: 1px solid rgba(197,160,89,0.2); border-radius: 4px; font-size: 0.82rem; color: #7a6a50; line-height: 1.6;">
+                <p style="margin: 0 0 0.5rem; font-weight: 600;">【対応していない相談内容】</p>
+                生死、病気の診断、ギャンブル、または誰かの不幸に関わる相談にはお答えできません。内容によってはリーダーが回答を差し控える場合があります。
+            </div>
+            <textarea class="question-field" id="questionInput" rows="4" placeholder="あなたの問いをこちらに記してください"></textarea>
             <button class="action-btn" onclick="goToSpread()">スプレッドを選択する</button>
         </div>
         <div class="step hidden" id="step-spread">
@@ -367,7 +371,13 @@ async function requestAI(){
             body: JSON.stringify({ model: 'qwen/qwen-2.5-72b-instruct', messages: [{role:'system', content:char.prompt}, {role:'user', content:prompt}], temperature: 0.7 })
         });
         const data = await res.json();
-        output.textContent = data.choices[0].message.content;
+        const content = data.choices[0].message.content;
+        output.textContent = content;
+        
+        // 規約拒絶文が含まれる場合、カードエリアを隠す
+        if (content.includes('規約によりお答えできません')) {
+            document.getElementById('visual-area').style.display = 'none';
+        }
     } catch(e) { output.textContent = 'エラー：' + e.message; }
 }
 </script>
