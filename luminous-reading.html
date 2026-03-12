@@ -248,10 +248,16 @@ const READING_PRINCIPLES = `
 ※前置きやカード解釈の混合は厳禁する。`;
 
 const CHARACTERS = {
-    ren: { name: 'レン', prompt: `あなたは占い師「レン」。クールで鋭い。${READING_PRINCIPLES}` },
-    miharu: { name: 'ミハル', prompt: `あなたは占い師「ミハル」。穏やかで包み込む。${READING_PRINCIPLES}` },
-    kazuko: { name: 'カズコ', prompt: `あなたは占い師「カズコ」。関西弁。${READING_PRINCIPLES}` }
+    ren: { name: 'レン', prompt: `あなたは占い師「レン」。クールで鋭い。${READING_PRINCIPLES}`, tabooMsg: '……注意事項を読まなかったのか？' },
+    miharu: { name: 'ミハル', prompt: `あなたは占い師「ミハル」。穏やかで包み込む。${READING_PRINCIPLES}`, tabooMsg: 'ごめんなさい、そのテーマは私には答えられないの。でも、その不安の奥にある気持ちを一緒に見てみることはできるよ。別の聞き方で話してみて。' },
+    kazuko: { name: 'カズコ', prompt: `あなたは占い師「カズコ」。関西弁。${READING_PRINCIPLES}`, tabooMsg: 'お母ちゃんそれアカン言うたやろ。そやけど話は聞いたりたいねん、聞き方変えてな。' }
 };
+
+const TABOO_KEYWORDS = /死|余命|寿命|病気|診断|妊娠|出産|ギャンブル|競馬|競艇|パチンコ|宝くじ|株|投資|呪|祟|不幸|殺|自殺|死にたい/;
+
+function isTaboo(text) {
+    return TABOO_KEYWORDS.test(text);
+}
 
 const TAROT_DATA = {
     majors: ["The Fool","The Magician","The High Priestess","The Empress","The Emperor","The Hierophant","The Lovers","The Chariot","Strength","The Hermit","Wheel of Fortune","Justice","The Hanged Man","Death","Temperance","The Devil","The Tower","The Star","The Moon","The Sun","Judgement","The World"],
@@ -350,7 +356,15 @@ document.getElementById('divinate-btn').onclick = () => {
         slot.appendChild(nm); container.appendChild(slot);
     });
     document.getElementById('visual-area').appendChild(container);
-    requestAI();
+
+    const question = document.getElementById('questionInput').value;
+    if (isTaboo(question)) {
+        const char = CHARACTERS[state.char];
+        const output = document.getElementById('readingOutput');
+        output.textContent = char.tabooMsg;
+    } else {
+        requestAI();
+    }
 };
 
 function getPath(name){
@@ -373,11 +387,6 @@ async function requestAI(){
         const data = await res.json();
         const content = data.choices[0].message.content;
         output.textContent = content;
-        
-        // 規約拒絶文が含まれる場合、カードエリアを隠す
-        if (content.includes('規約によりお答えできません')) {
-            document.getElementById('visual-area').style.display = 'none';
-        }
     } catch(e) { output.textContent = 'エラー：' + e.message; }
 }
 </script>
